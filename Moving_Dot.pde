@@ -8,7 +8,7 @@ void setup()
 int xcoord = 4;
 int ycoord = 4;
 
-void loop() 
+void loop()
 {
   MoveDot();
   boundary();
@@ -17,55 +17,54 @@ void loop()
 
 
 
-void MoveDot() 
+void MoveDot()
 {
   DrawPx(xcoord, ycoord, Red);
   DisplaySlate();
   CheckButtonsPress();
   ClearSlate();
+  delay(50);
   
-  if (Button_Up) {    // moves dot up one if up button is pressed. 
+  if (Button_Up) { // moves dot up one if up button is pressed.
     ycoord++;
-    if (ycoord > 7) {
-      ycoord = 0;
-    }
   }
 
-  if (Button_Down) {    // moves dot down one if down button is pressed. 
+  if (Button_Down) {    // moves dot down one if down button is pressed.
     ycoord--;
-    if (ycoord < 0) {
-      ycoord = 7;
-    }
   }
   
-  if (Button_Left) {
+  if (Button_Left) {    // moves dot one to the left if left button isp pressed.
     xcoord--;
-    if (xcoord < 0) {    // sends dot to right side of board if it goes off the left side. 
-       xcoord = 7;
-    }
   }
   
-  if (Button_Right) {
-    xcoord++;  
-    if (xcoord > 7) {     // sends dot to other side of board if it
-      xcoord = 0;
-    }
+  if (Button_Right) {    // moves dot one to the right if right button is pressed.     
+    xcoord++;
   }
-  delay(50);
+  
+  if (xcoord < 1) {    // dot can't go on or past the left side of the boundary. 
+    xcoord = 1;
+  }
+  
+  if (xcoord > 6) {    // dot can't go on or past the right side of the boundary.
+    xcoord = 6; 
+  }
+   
+  if (ycoord < 1) {    // dot can't go on or past the bottom side of the boundary.
+    ycoord = 1;
+  }
+  
+  if (ycoord > 6) {    // dot can't go on or past the top side of the boundary.
+    ycoord = 6;
+  }
 }
 
 
-void boundary() 
+void boundary()    // creates a square boundry that goes around the board. 
 {
   for (int i = 0; i < 8; i++) {
-    DrawPx(i,0, 15);
-    DrawPx(0,i, 15);
-    DrawPx(i,7, 15);
-    DrawPx(7,i, 15);
+    DrawPx(i,0, 15);    // left side of the square.
+    DrawPx(0,i, 15);    // bottom side of the square. 
+    DrawPx(i,7, 15);    // top side of the square.
+    DrawPx(7,i, 15);    // right side of the square. 
   }
 }
-
-
-
-    
-    
